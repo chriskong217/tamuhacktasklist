@@ -10,9 +10,9 @@ function App() {
     <BrowserRouter>
         <Navbar />
         <Routes>
-	  <Route path="/" component={Home} />
-	  <Route path="/signup" component={SignUp} />
-          <Route path="/tasklist" component={TaskList} />
+	  <Route exact path="/" exact element={<Home/>} />
+	  <Route path="/signup" element={<SignUp/>} />
+          <Route path="/tasklist" element={<TaskList/>} />
         </Routes>
     </BrowserRouter>
   );
