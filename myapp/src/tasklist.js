@@ -5,9 +5,9 @@ import App from './components/Tasklist/Task';
 import reportWebVitals from './reportWebVitals';
 
 const tasks = ReactDOM.createRoot(document.getElementById('tasks'));
-root.render(
+tasks.render(
   <React.StrictMode>
-    <Task />
+    <App />
   </React.StrictMode>
 );
 
