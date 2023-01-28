@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
 
 function TaskList() {
-  const [tasks, setTasks] = useState(['Finish project', 'Buy groceries', 'Call mom']);
+  const [tasks, setTasks] = useState(["Go to the store", "Buy milk", "Do laundry"]);
+  const [newTask, setNewTask] = useState('');
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    setTasks([...tasks, newTask]);
+    setNewTask('');
+  };
+
+  const handleChange = event => {
+    setNewTask(event.target.value);
+  };
 
   return (
     <div>
