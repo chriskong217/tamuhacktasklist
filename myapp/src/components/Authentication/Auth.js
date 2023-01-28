@@ -1,20 +1,29 @@
 import React, { useState } from 'react';
+import 'firebase/compat/auth';
+import firebase from "firebase/compat/app";
+import './Firebase.js';
 
 function LoginForm() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // perform login logic here
-    console.log(`Username: ${username} Password: ${password}`);
+    try {
+      const { user } = await firebase.auth().signInWithEmailAndPassword(email, password);
+      // Store user data in session storage
+      sessionStorage.setItem('user', JSON.stringify(user));
+    } catch (error) {
+      alert("Invalid login!")
+      console.error(error);
+    }
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Username:
-        <input type="text" value={username} onChange={event => setUsername(event.target.value)} />
+        Email:
+        <input type="text" value={email} onChange={event => setEmail(event.target.value)} />
       </label>
       <br />
       <label>
