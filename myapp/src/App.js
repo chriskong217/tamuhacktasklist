@@ -1,7 +1,7 @@
 import Navbar from './components/Navbar/Navbar.js';
 import TaskList from './components/Tasklist/Task';
 import Home from './components/Home/Home';
-import SignUp from './components/signup.js';
+import SignUp from './components/Signup/signup.js';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
