@@ -4,8 +4,8 @@ import './index.css';
 import App from './components/Tasklist/Task';
 import reportWebVitals from './reportWebVitals';
 
-const tasks = ReactDOM.createRoot(document.getElementById('tasks'));
-tasks.render(
+const task = ReactDOM.createRoot(document.getElementById('tasks'));
+task.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
