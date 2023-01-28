@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function TaskList() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(['Finish project', 'Buy groceries', 'Call mom']);
 
   return (
     <div>
@@ -20,4 +20,3 @@ function TaskList() {
 }
 
 export default TaskList;
-
