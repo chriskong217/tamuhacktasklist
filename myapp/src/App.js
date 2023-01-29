@@ -5,15 +5,13 @@ import Login from './components/Authentication/Auth';
 
 import axios from 'axios';
 
-import useToken from './useToken';
-
 import { useState, useEffect } from 'react';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
 
 import PrivateRoute from './Utils/PrivateRoute';
 import PublicRoute from './Utils/PublicRoute';
-import { getToken, removeUserSession, setUserSession } from './Utils/Common';
+import { getToken, removeUserSession, setUserSession, getUser } from './Utils/Common';
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
@@ -37,6 +35,7 @@ function App() {
     return <div className="content">Checking Authentication...</div>
   }
 
+  const notLoggedIn = (getUser() != null)
 
   return (
     <BrowserRouter>
@@ -44,7 +43,13 @@ function App() {
       <Routes>
 	<Route exact path="/" exact element={<Home/>} />
 	<Route path="/login" element={<Login/>} />
-	<Route path="/tasklist" element={<TaskList/>} />
+	<Route path="/tasklist" element={
+	  notLoggedIn ? (
+	    <TaskList/>
+	  ) : (
+	    <Navigate replace to="/login" />
+	  )
+	} />
       </Routes>
     </BrowserRouter>
   );
