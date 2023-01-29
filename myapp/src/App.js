@@ -43,8 +43,8 @@ function App() {
       <Navbar />
       <Routes>
 	<Route exact path="/" exact element={<Home/>} />
-	<PrivateRoute path="/tasklist" element={<Login/>} />
-	<PublicRoute path="/login" element={<TaskList/>} />
+	<Route path="/login" element={<Login/>} />
+	<Route path="/tasklist" element={<TaskList/>} />
       </Routes>
     </BrowserRouter>
   );

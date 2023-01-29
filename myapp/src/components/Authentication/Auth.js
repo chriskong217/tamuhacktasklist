@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { setUserSession } from '../../Utils/Common';
+import { useNavigate } from 'react-router-dom';
 
 
 function Login(props) {
@@ -10,13 +11,17 @@ function Login(props) {
   const [error, setError] = useState(null);
 
   // handle button click of login form
+  const navigate = useNavigate();
+  const redirect = event => navigate('/tasklist')
+	//
   const handleLogin = () => {
     setError(null);
     setLoading(true);
     axios.post('http://localhost:4000/users/signin', { username: username.value, password: password.value }).then(response => {
       setLoading(false);
       setUserSession(response.data.token, response.data.user);
-      props.history.push('/tasklist');
+      redirect();
+//      props.history.push('/tasklist');
     }).catch(error => {
       setLoading(false);
       if (error.response.status === 401) setError(error.response.data.message);
