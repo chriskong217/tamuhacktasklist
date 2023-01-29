@@ -1,37 +1,52 @@
 import React, { useState } from 'react';
 
 function TaskList() {
-  const [tasks, setTasks] = useState([]);
-  const [task, setTask] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [location, setLocation] = useState('');
-  const [description, setDescription] = useState('');
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem('tasks')) || []
+  );
 
-  function addTask() {
-    setTasks([...tasks, { name: task, date: date, time: time, location: location, description: description, completed: false }]);
+  function addTask(task) {
+    const newTasks = [...tasks, task];
+    setTasks(newTasks);
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
   }
 
   function removeTask(index) {
-    setTasks(tasks.filter((task, i) => i !== index));
+    const newTasks = tasks.filter((task, i) => i !== index);
+    setTasks(newTasks);
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
   }
 
   return (
     <div>
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        addTask();
-        setTask('');
-        setDate('');
-        setTime('');
-        setLocation('');
-        setDescription('');
-      }}>
-        <input type="text" name="task" placeholder="Add new task" value={task} onChange={(e) => setTask(e.target.value)} />
-        <input type="date" name="date" placeholder="Add task date" value={date} onChange={(e) => setDate(e.target.value)} />
-        <input type="time" name="time" placeholder="Add task time" value={time} onChange={(e) => setTime(e.target.value)} />
-        <input type="text" name="location" placeholder="Add task location" value={location} onChange={(e) => setLocation(e.target.value)} />
-        <input type="text" name="description" placeholder="Add task description" style={{width: "500px"}} value={description} onChange={(e) => setDescription(e.target.value)} />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          addTask({
+            name: e.target.task.value,
+            date: e.target.date.value,
+            time: e.target.time.value,
+            location: e.target.location.value,
+            description: e.target.description.value,
+            completed: false,
+          });
+          e.target.task.value = '';
+          e.target.date.value = '';
+          e.target.description.value = '';
+          e.target.location.value = '';
+          e.target.time.value = '';
+        }}
+      >
+        <input type="text" name="task" placeholder="Add new task" />
+        <input type="date" name="date" placeholder="Add task date" />
+        <input type="time" name="time" placeholder="Add task time" />
+        <input type="text" name="location" placeholder="Add task location" />
+        <input
+          type="text"
+          name="description"
+          placeholder="Add task description"
+          style={{ width: '500px' }}
+        />
         <button type="submit">Add</button>
       </form>
       <ul>
@@ -51,4 +66,6 @@ function TaskList() {
 }
 
 export default TaskList;
+
+
 
