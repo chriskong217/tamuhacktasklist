@@ -20,6 +20,7 @@ function Login(props) {
     axios.post('http://localhost:4000/users/signin', { username: username.value, password: password.value }).then(response => {
       setLoading(false);
       setUserSession(response.data.token, response.data.user);
+      window.location.reload(false);
       redirect();
 //      props.history.push('/tasklist');
     }).catch(error => {

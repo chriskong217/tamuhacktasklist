@@ -35,8 +35,6 @@ function App() {
     return <div className="content">Checking Authentication...</div>
   }
 
-  const notLoggedIn = (getUser() != null)
-
   return (
     <BrowserRouter>
       <Navbar />
@@ -44,7 +42,7 @@ function App() {
 	<Route exact path="/" exact element={<Home/>} />
 	<Route path="/login" element={<Login/>} />
 	<Route path="/tasklist" element={
-	  notLoggedIn ? (
+	  (getUser() != null) ? (
 	    <TaskList/>
 	  ) : (
 	    <Navigate replace to="/login" />
