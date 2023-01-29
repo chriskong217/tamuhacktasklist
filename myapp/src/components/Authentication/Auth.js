@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { setUserSession } from '../../Utils/Common';
 import { useNavigate } from 'react-router-dom';
+import './Auth.css';
 
 
 function Login(props) {
@@ -32,7 +33,7 @@ function Login(props) {
 
   return (
     <div>
-      Login<br /><br />
+      <h1>Login<br /><br /></h1>
       <div>
         Username<br />
         <input type="text" {...username} autoComplete="new-password" />

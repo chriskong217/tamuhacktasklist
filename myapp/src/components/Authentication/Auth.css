@@ -1,0 +1,39 @@
+.Auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+input[type="button"] {
+  width: 100px;
+  height: 30px;
+  margin-top: 20px;
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 350px;
+  left: 35px;
+}
+
+input[type="button"]:hover {
+  background-color: darkgreen;
+}
+
+small {
+  margin-top: 10px;
+}
+
+body {
+  background-color: lightgray;
+}
+
+.Auth h1 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  position: absolute;
+  left: 45px;
+}
