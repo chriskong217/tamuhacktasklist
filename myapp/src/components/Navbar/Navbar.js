@@ -15,7 +15,7 @@ const Navbar = () => {
             Login
           </NavLink>
           {getUser() && (
-	    <div>
+	    <div class="logtask">
             <NavLink to="/tasklist" activeStyle>
               Task List
             </NavLink>

@@ -46,13 +46,18 @@
     overflow-x: hidden;
     top: 35%;
     right: 55%;
+    background-color: #f7bd53;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: black;
   }
 
   .task-box::-webkit-scrollbar {
     width: 5px;
     height: 2px;
-    background-color: #ffffff;
+    background-color: transparent;
     border-radius: 15px;
+    
 }
 
 
@@ -71,7 +76,65 @@
 
   .submit-button {
     position: absolute;
-    left: -300px;
+    left: -475px;
     bottom: 50px;
-    color: red;
+    appearance: button;
+  background-color: #f7bd53;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 100%;
+}
+
+
+
+.submit-button:after {
+  background-clip: padding-box;
+  background-color: #ffa600;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.submit-button:main,
+.submit-button:focus {
+  user-select: auto;
+}
+
+.submit-button:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+.submit-button:disabled {
+  cursor: auto;
 }
