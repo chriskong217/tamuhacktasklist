@@ -1,0 +1,78 @@
+/* CSS for TaskList component */
+.TaskList {
+    /* Position the form in the center right of the screen */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .add-task-form {
+    text-align: left;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    margin: auto;
+    top: 20%;
+    left: 30%;
+    width: 400px;
+    height: 500px;
+    
+  }
+  
+  input {
+    /* Add some spacing between the input fields */
+    margin-bottom: 10px;
+  }
+
+  .input-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 auto;
+    padding-left: 10px;
+  }
+
+  .task-box {
+    position: absolute;
+    width: 400px;
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    top: 35%;
+    right: 55%;
+  }
+
+  .task-box::-webkit-scrollbar {
+    width: 5px;
+    height: 2px;
+    background-color: #ffffff;
+    border-radius: 15px;
+}
+
+
+.task-box::-webkit-scrollbar-thumb {
+    width: 10px;
+    height: 10px;
+    transition: height 0.5s ease-in-out;
+    background-color: #ffa600; /* thumb color */
+    border-radius: 15px; /* roundness of the thumb */
+  }
+
+.task-box::-webkit-scrollbar-thumb:hover {
+    width: 15px;
+    height: 15px;
+  }
+
+  .submit-button {
+    position: absolute;
+    left: -300px;
+    bottom: 50px;
+    color: red;
+}
