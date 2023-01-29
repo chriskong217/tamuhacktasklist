@@ -2,6 +2,7 @@ import Navbar from './components/Navbar/Navbar.js';
 import TaskList from './components/Tasklist/Task';
 import Home from './components/Home/Home';
 import Login from './components/Authentication/Auth';
+import Logout from './components/Logout/Logout';
 
 import axios from 'axios';
 
@@ -48,6 +49,7 @@ function App() {
 	    <Navigate replace to="/login" />
 	  )
 	} />
+	<Route path="/logout" element={<Logout/>} />
       </Routes>
     </BrowserRouter>
   );
