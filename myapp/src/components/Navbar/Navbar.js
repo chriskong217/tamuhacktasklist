@@ -1,6 +1,7 @@
 import React from "react";
 import { Nav, NavLink, NavMenu } 
     from "./NavbarElements";
+import { getUser } from '../../Utils/Common';
   
 const Navbar = () => {
   return (
@@ -10,15 +11,19 @@ const Navbar = () => {
           <NavLink to="/" activeStyle>
             Home
           </NavLink>
-          <NavLink to="/tasklist" activeStyle>
-            Task List
-          </NavLink>
           <NavLink to="/login" activeStyle>
             Login
           </NavLink>
-          <NavLink to="/logout" activeStyle>
-            Logout
-          </NavLink>
+          {getUser() && (
+	    <div>
+            <NavLink to="/tasklist" activeStyle>
+              Task List
+            </NavLink>
+            <NavLink to="/logout" activeStyle>
+              Logout
+            </NavLink>
+	    </div>
+          )}
         </NavMenu>
       </Nav>
     </>
