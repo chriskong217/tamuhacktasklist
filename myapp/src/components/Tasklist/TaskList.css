@@ -76,8 +76,8 @@
 
   .submit-button {
     position: absolute;
-    left: -475px;
-    bottom: 50px;
+    left: -510px;
+    bottom: 20px;
     appearance: button;
   background-color: #f7bd53;
   border: solid transparent;
