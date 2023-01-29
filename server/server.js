@@ -4,7 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
- 
+const utils = require('./utils');
+
 const app = express();
 const port = process.env.PORT || 4000;
 

@@ -1,53 +1,56 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import axios from 'axios';
+import { setUserSession } from '../../Utils/Common';
 
 
-function loginUser(credentials) {
- return fetch('http://localhost:8080/login', {
-   method: 'POST',
-   headers: {
-     'Content-Type': 'application/json'
-   },
-   body: JSON.stringify(credentials)
- })
-   .then(data => data.json())
-}
+function Login(props) {
+  const [loading, setLoading] = useState(false);
+  const username = useFormInput('');
+  const password = useFormInput('');
+  const [error, setError] = useState(null);
 
-function LoginForm({ setToken }) {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const token = await loginUser({
-      username,
-      password
+  // handle button click of login form
+  const handleLogin = () => {
+    setError(null);
+    setLoading(true);
+    axios.post('http://localhost:4000/users/signin', { username: username.value, password: password.value }).then(response => {
+      setLoading(false);
+      setUserSession(response.data.token, response.data.user);
+      props.history.push('/tasklist');
+    }).catch(error => {
+      setLoading(false);
+      if (error.response.status === 401) setError(error.response.data.message);
+      else setError("Something went wrong. Please try again later.");
     });
-    setToken(token);
   }
 
-  return(
-    <div className="login-wrapper">
-      <h1>Please Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <p>Username</p>
-          <input type="text" />
-        </label>
-        <label>
-          <p>Password</p>
-          <input type="password" />
-        </label>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+  return (
+    <div>
+      Login<br /><br />
+      <div>
+        Username<br />
+        <input type="text" {...username} autoComplete="new-password" />
+      </div>
+      <div style={{ marginTop: 10 }}>
+        Password<br />
+        <input type="password" {...password} autoComplete="new-password" />
+      </div>
+      {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
+      <input type="button" value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} /><br />
     </div>
-  )
+  );
 }
 
-export default LoginForm;
+const useFormInput = initialValue => {
+  const [value, setValue] = useState(initialValue);
 
-LoginForm.propTypes = {
-  setToken: PropTypes.func.isRequired
+  const handleChange = e => {
+    setValue(e.target.value);
+  }
+  return {
+    value,
+    onChange: handleChange
+  }
 }
+
+export default Login;

@@ -1,31 +1,51 @@
 import Navbar from './components/Navbar/Navbar.js';
 import TaskList from './components/Tasklist/Task';
 import Home from './components/Home/Home';
-import SignUpForm from './components/Signup/Signup.js';
 import Login from './components/Authentication/Auth';
+
+import axios from 'axios';
 
 import useToken from './useToken';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-function App() {
-  const { token, setToken } = useToken();
+import PrivateRoute from './Utils/PrivateRoute';
+import PublicRoute from './Utils/PublicRoute';
+import { getToken, removeUserSession, setUserSession } from './Utils/Common';
 
-  if(!token) {
-    return <Login setToken={setToken} />
+function App() {
+  const [authLoading, setAuthLoading] = useState(true);
+ 
+  useEffect(() => {
+    const token = getToken();
+    if (!token) {
+      return;
+    }
+ 
+    axios.get(`http://localhost:4000/verifyToken?token=${token}`).then(response => {
+      setUserSession(response.data.token, response.data.user);
+      setAuthLoading(false);
+    }).catch(error => {
+      removeUserSession();
+      setAuthLoading(false);
+    });
+  }, []);
+ 
+  if (authLoading && getToken()) {
+    return <div className="content">Checking Authentication...</div>
   }
+
 
   return (
     <BrowserRouter>
-        <Navbar />
-        <Routes>
-	  <Route exact path="/" exact element={<Home/>} />
-	  <Route path="/login" element={<Login/>} />
-	  <Route path="/signup" element={<SignUpForm/>} />
-          <Route path="/tasklist" element={<TaskList/>} />
-        </Routes>
+      <Navbar />
+      <Routes>
+	<Route exact path="/" exact element={<Home/>} />
+	<PrivateRoute path="/tasklist" element={<Login/>} />
+	<PublicRoute path="/login" element={<TaskList/>} />
+      </Routes>
     </BrowserRouter>
   );
 }
