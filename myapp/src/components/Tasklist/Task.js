@@ -2,15 +2,27 @@ import React, { useState, useEffect } from 'react';
 import './TaskList.css'; // import the CSS file
 
 function TaskList() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) || []);
+
+  useEffect(() => {
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
   function addTask(task) {
     setTasks([...tasks, task].sort((a, b) => new Date(a.date + ' ' + a.time) - new Date(b.date + ' ' + b.time)));
   }
- 
+
   function removeTask(index) {
     setTasks(tasks.filter((task, i) => i !== index));
   }
- 
+
   return (
     <div className="task-list-container">
       <form className="add-task-form" onSubmit={(e) => {
@@ -26,14 +38,14 @@ function TaskList() {
         e.target.location.value = '';
         e.target.time.value = '';
       }}>
-       
+
         <input type="text" name="task" placeholder="Add new task" />
         <input type="date" name="date" placeholder="Add task date" />
         <input type="time" name="time" placeholder="Add task time" />
         <input type="text" name="location" placeholder="Add task location" />
         <input type="text" name="description" placeholder="Add task description" style={{ height: "100px" }} />
         <button className="submit-button" type="submit">Add</button>
-        
+
       </form>
       <div className="task-box" style={{height: "300px", overflowY: "scroll"}}>
       <ul style ={{listStyle:'none'}}>
